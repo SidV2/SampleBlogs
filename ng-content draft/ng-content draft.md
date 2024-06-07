@@ -37,48 +37,30 @@ Angular also allows for more complex content projection using named slots (selec
 **Child Component (card.component.html)**
 
     <div class="card">
-        <div class="card-header">
-            <ng-content select="[card-header]"></ng-content>
-        </div>
-    <div class="card-content">
-        <ng-content select="[card-content]"></ng-content>
-    </div>
-    <div class="card-footer">
-        <ng-content select="[card-footer]"></ng-content>
-    </div>
+        <ng-content select="card-header"></ng-content>  
+        <ng-content select="card-content"></ng-content>
+        <ng-content select="card-footer"></ng-content>
     </div>
 
 **Parent Component (app.component.html)**
     
     <app-card>
-        <div card-header>
+        <card-header>
             <h2>Header Content</h2>
-        </div>
-        <div card-content>
+        </card-header>
+        <card-content>
             <p>This is the main content of the card.</p>
-        </div>
-        <div card-footer>
+        </card-content>
+        <card-footer>
             <button>Footer Button</button>
-        </div>
+        </card-footer>
     </app-card>
 
-**In this example, the select attribute in ng-content specifies which elements to project into each placeholder. The rendered HTML will look like this:**
-
-    <div class="card">
-        <div class="card-header">
-            <h2>Header Content</h2>
-        </div>
-        <div class="card-content">
-            <p>This is the main content of the card.</p>
-        </div>
-        <div class="card-footer">
-            <button>Footer Button</button>
-        </div>
-    </div>
-
+Selector tags will determine where the content gets projected. 
+In this example <card-header> will project header content to select="card-header" in the child.
 While all these were simple use cases of ng-content promoting re-usability, the true potential of ng-content is exposed when it is used with ng-template. 
 
-In the following scenario there exists a card component which can show data of a student as well as a teacher. Let’s explore how we can re-use the same card component for showing the details of the teacher or the student without using conditionals like @if.
+In the following scenario there exists a card component which can show data of a student as well as a teacher. Let’s explore how we can re-use the same card component for showing the details of the teacher or the student without using conditionals blocks like @if.
 
 Let’s first see the student component.
 
