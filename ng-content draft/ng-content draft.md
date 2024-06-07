@@ -65,7 +65,7 @@ In the following scenario there exists a card component which can show data of a
 
 Let’s first see the student component.
 
-**student-card.component.ts
+**student-card.component.ts**
 
 !(student-card.png)
 Now let’s see the teacher component.
