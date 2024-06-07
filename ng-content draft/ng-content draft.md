@@ -57,7 +57,7 @@ Angular also allows for more complex content projection using named slots (selec
     </app-card>
 
 Selector tags will determine where the content gets projected. 
-In this example <card-header> will project header content to select="card-header" in the child.
+In this example **<card-header>** will project header content to select="card-header" in the child.
 While all these were simple use cases of ng-content promoting re-usability, the true potential of ng-content is exposed when it is used with ng-template. 
 
 In the following scenario there exists a card component which can show data of a student as well as a teacher. Let’s explore how we can re-use the same card component for showing the details of the teacher or the student without using conditionals blocks like @if.
