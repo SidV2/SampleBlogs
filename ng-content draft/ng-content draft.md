@@ -67,14 +67,13 @@ Let’s first see the student component.
 
 **student-card.component.ts**
 
-!(student-card.png)
+![](student-card.png)
+
 Now let’s see the teacher component.
 
 **teacher-card.component.ts**
 
-![A screen shot of a computer program
-
-Description automatically generated](Aspose.Words.98aae1ac-46f8-4823-bca2-aadca379f2bc.008.png)
+![](teacher-card.png)
 
 The interesting thing to notice here is the #rowRef template reference. We will read the reference in the child component.
 
