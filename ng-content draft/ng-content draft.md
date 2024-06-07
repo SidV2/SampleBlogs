@@ -14,15 +14,15 @@ Let’s start with a simple example to understand the basic usage of **ng-conten
 
 **Child Component (alert.component.html)**
 
-    <div class="alret">
+    <div class="alert">
         <ng-content />
     </div>
 
 **Parent Component** (**app.component.html**)
 
-![A black rectangular object with white text
-
-Description automatically generated](Aspose.Words.98aae1ac-46f8-4823-bca2-aadca379f2bc.002.png)
+    <app-alert>
+        <p>This is an important alert message!</p>
+    </app-alert>
 
 In this example, the **<ng-content></ng-content>** tag in the **alert.component.html** acts as a placeholder. The content within the **<app-alert>** tags in the **app.component.html** is projected into this placeholder, resulting in the following rendered HTML.
 
