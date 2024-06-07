@@ -1,4 +1,5 @@
-﻿In the world of modern web development, building reusable and flexible components is crucial. Angular, provides a powerful feature known as **ng-content** to achieve this. This feature allows developers to project content from a parent component into a child component, making it easier to create dynamic and customizable components. In this blog post, we'll explore what **ng-content** is, how it works, and how you can use it to enhance your Angular applications.
+﻿
+In the world of modern web development, building reusable and flexible components is crucial. Angular, provides a powerful feature known as **ng-content** to achieve this. This feature allows developers to project content from a parent component into a child component, making it easier to create dynamic and customizable components. In this blog post, we'll explore what **ng-content** is, how it works, and how you can use it to enhance your Angular applications.
 
 ## What is ng-content?
 
@@ -30,7 +31,7 @@ In this example, the **<ng-content></ng-content>** tag in the **alert.component.
         <p>This is an important alert message! </p>
     </div>
 
-**Named Slots with ng-content**
+## Named Slots with ng-content**
 
 Angular also allows for more complex content projection using named slots (select attiribute). Named slots enable you to define multiple placeholders within a single component, each of which can be filled with different content from the parent component.
 
