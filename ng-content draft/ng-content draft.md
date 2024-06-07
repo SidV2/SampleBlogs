@@ -14,9 +14,9 @@ Let’s start with a simple example to understand the basic usage of **ng-conten
 
 **Child Component (alert.component.html)**
 
-![A black rectangular object with white text
-
-Description automatically generated](Aspose.Words.98aae1ac-46f8-4823-bca2-aadca379f2bc.001.png)
+    <div class="alret">
+        <ng-content />
+    </div>
 
 **Parent Component** (**app.component.html**)
 
