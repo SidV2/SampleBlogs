@@ -26,9 +26,9 @@ Let’s start with a simple example to understand the basic usage of **ng-conten
 
 In this example, the **<ng-content></ng-content>** tag in the **alert.component.html** acts as a placeholder. The content within the **<app-alert>** tags in the **app.component.html** is projected into this placeholder, resulting in the following rendered HTML.
 
-![A black box with white text
-
-Description automatically generated](Aspose.Words.98aae1ac-46f8-4823-bca2-aadca379f2bc.003.png)
+    <div class="alert">
+        <p>This is an important alert message! </p>
+    </div>
 
 **Named Slots with ng-content**
 
@@ -36,19 +36,45 @@ Angular also allows for more complex content projection using named slots (selec
 
 **Child Component (card.component.html)**
 
-![A computer screen with text on it
+    <div class="card">
+        <div class="card-header">
+            <ng-content select="[card-header]"></ng-content>
+        </div>
+    <div class="card-content">
+        <ng-content select="[card-content]"></ng-content>
+    </div>
+    <div class="card-footer">
+        <ng-content select="[card-footer]"></ng-content>
+    </div>
+    </div>
 
-Description automatically generated](Aspose.Words.98aae1ac-46f8-4823-bca2-aadca379f2bc.004.png)
-
-**Parent Component (app.component.html)![A black screen with white text
-
-Description automatically generated](Aspose.Words.98aae1ac-46f8-4823-bca2-aadca379f2bc.005.png)**
+**Parent Component (app.component.html)**
+    
+    <app-card>
+        <div card-header>
+            <h2>Header Content</h2>
+        </div>
+        <div card-content>
+            <p>This is the main content of the card.</p>
+        </div>
+        <div card-footer>
+            <button>Footer Button</button>
+        </div>
+    </app-card>
 
 **In this example, the select attribute in ng-content specifies which elements to project into each placeholder. The rendered HTML will look like this:**
 
-![A screenshot of a computer
-
-Description automatically generated](Aspose.Words.98aae1ac-46f8-4823-bca2-aadca379f2bc.006.png)
+    <div class="card">
+        <div class="card-header">
+            <h2>Header Content</h2>
+        </div>
+        <div class="card-content">
+            <p>This is the main content of the card.</p>
+        </div>
+        <div class="card-footer">
+            <button>Footer Button</button>
+        </div>
+    </div>
 
 While all these were simple use cases of ng-content promoting re-usability, the true potential of ng-content is exposed when it is used with ng-template. 
 
