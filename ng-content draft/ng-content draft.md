@@ -66,10 +66,8 @@ In the following scenario there exists a card component which can show data of a
 Let’s first see the student component.
 
 **student-card.component.ts
-![A screen shot of a computer program
 
-Description automatically generated](Aspose.Words.98aae1ac-46f8-4823-bca2-aadca379f2bc.007.png)**
-
+!(student-card.png)
 Now let’s see the teacher component.
 
 **teacher-card.component.ts**
