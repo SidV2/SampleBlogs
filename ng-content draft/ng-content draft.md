@@ -68,19 +68,167 @@ Let’s first see the student component.
 
 **student-card.component.ts**
 
-![](student-card.png)
+```typescript
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  FakeHttpService,
+  randStudent,
+} from '../../data-access/fake-http.service';
+import { StudentStore } from '../../data-access/student.store';
+import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
+
+@Component({
+  selector: 'app-student-card',
+  template: `
+    <app-card [items]="students()" (add)="addStudent()" class="bg-light-green">
+      <img src="assets/img/student.webp" width="200px" />
+      <ng-template #rowRef [cardRow]="students()" let-student>
+        <app-list-item (delete)="deleteStudent(student.id)">
+          {{ student.firstName }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
+  `,
+  standalone: true,
+  styles: [
+    `
+      .bg-light-green {
+        background-color: rgba(0, 250, 0, 0.1);
+      }
+    `,
+  ],
+  imports: [CardComponent, ListItemComponent, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class StudentCardComponent {
+  private http = inject(FakeHttpService);
+  private store = inject(StudentStore);
+
+  students = this.store.students;
+
+  constructor() {
+    this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
+  }
+
+  addStudent() {
+    this.store.addOne(randStudent());
+  }
+
+  deleteStudent(id: number) {
+    this.store.deleteOne(id);
+  }
+}
+```
 
 Now let’s see the teacher component.
 
 **teacher-card.component.ts**
 
-![](teacher-card.png)
+```typescript
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  FakeHttpService,
+  randTeacher,
+} from '../../data-access/fake-http.service';
+import { TeacherStore } from '../../data-access/teacher.store';
+import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from '../../ui/list-item/list-item.component';
+
+@Component({
+  selector: 'app-teacher-card',
+  template: `
+    <app-card [items]="teachers()" class="bg-light-red" (add)="addTeacher()">
+      <img src="assets/img/teacher.png" width="200px" />
+      <ng-template #rowRef [cardRow]="teachers()" let-teacher>
+        <app-list-item (delete)="deleteTeacher(teacher.id)">
+          {{ teacher.firstName }}
+        </app-list-item>
+      </ng-template>
+    </app-card>
+  `,
+  styles: [
+    `
+      .bg-light-red {
+        background-color: rgba(250, 0, 0, 0.1);
+      }
+    `,
+  ],
+  standalone: true,
+  imports: [ListItemComponent, AsyncPipe, CardComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class TeacherCardComponent {
+  private http = inject(FakeHttpService);
+  private store = inject(TeacherStore);
+
+  teachers = this.store.teachers;
+
+  constructor() {
+    this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
+  }
+
+  addTeacher() {
+    this.store.addOne(randTeacher());
+  }
+
+  deleteTeacher(id: number) {
+    this.store.deleteOne(id);
+  }
+}
+```
 
 The interesting thing to notice here is the #rowRef template reference. We will read the reference in the child component.
 
 Here is the child component which is card component.
 
-![](app-card.png)
+**app-card.component.ts**
+
+```typescript
+import { NgTemplateOutlet } from '@angular/common';
+    import {
+  ChangeDetectionStrategy,
+  Component,
+  contentChild,
+  input,
+  output,
+  TemplateRef,
+} from '@angular/core';
+
+@Component({
+  selector: 'app-card',
+  template: `
+    <ng-content select="img" />
+
+    <section>
+      @for (item of items(); track item.id) {
+        <ng-template
+          [ngTemplateOutlet]="rowTemplate()!"
+          [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+      }
+    </section>
+
+    <button
+      class="rounded-sm border border-blue-500 bg-blue-300 p-2"
+      (click)="add.emit()">
+      Add
+    </button>
+  `,
+  standalone: true,
+  imports: [NgTemplateOutlet],
+  host: {
+    class: 'border-2 border-black rounded-md p-4 w-fit flex flex-col gap-3',
+  },
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class CardComponent<T extends { id: number }> {
+  items = input.required<T[]>();
+  add = output();
+  rowTemplate = contentChild<TemplateRef<unknown>>('rowRef'); // Signal<ElementRef|undefined>
+}
+```
 
 Notice how the projected content from student card component and teacher card component is accessed via contentChild. In this case we get access to the template ‘rowRef’ passed from parent components. 
 
