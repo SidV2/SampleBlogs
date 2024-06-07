@@ -79,9 +79,7 @@ The interesting thing to notice here is the #rowRef template reference. We will 
 
 Here is the child component which is card component.
 
-![A screen shot of a computer program
-
-Description automatically generated](Aspose.Words.98aae1ac-46f8-4823-bca2-aadca379f2bc.009.png)
+![](app-card.png)
 
 Notice how the projected content from student card component and teacher card component is accessed via contentChild. In this case we get access to the template ‘rowRef’ passed from parent components. 
 
