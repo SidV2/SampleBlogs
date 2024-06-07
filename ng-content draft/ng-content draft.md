@@ -1,6 +1,6 @@
 ﻿In the world of modern web development, building reusable and flexible components is crucial. Angular, provides a powerful feature known as **ng-content** to achieve this. This feature allows developers to project content from a parent component into a child component, making it easier to create dynamic and customizable components. In this blog post, we'll explore what **ng-content** is, how it works, and how you can use it to enhance your Angular applications.
 
-**What is ng-content?**
+## What is ng-content?
 
 **ng-content** is an Angular directive used for content projection, which is a technique that enables you to insert content from a parent component into a child component. This is particularly useful for creating reusable components where the content inside the component can be defined by the parent component.
 
